@@ -1,5 +1,6 @@
-
+import seaborn as sns
 import pandas as pd
+from seaborn import pairplot
 
 # @title
 chicago_taxi_dataset = pd.read_csv("https://download.mlcc.google.com/mledu-datasets/chicago_taxi_train.csv")
@@ -9,7 +10,8 @@ chicago_taxi_dataset = pd.read_csv("https://download.mlcc.google.com/mledu-datas
 # Updates dataframe to use specific columns.
 training_df = chicago_taxi_dataset[['TRIP_MILES', 'TRIP_SECONDS', 'FARE', 'COMPANY', 'PAYMENT_TYPE', 'TIP_RATE']]
 
-print('Read dataset completed successfully.')
-print('Total number of rows: {0}\n\n'.format(len(training_df.index)))
-print(training_df.head(200))
-print(training_df.describe(include='all'))
+print(training_df.corr(numeric_only = True))
+
+#@title Code - View pairplot
+pair = sns.pairplot(training_df, x_vars=["FARE", "TRIP_MILES", "TRIP_SECONDS"], y_vars=["FARE", "TRIP_MILES", "TRIP_SECONDS"])
+pair.savefig("pairplot.png")
