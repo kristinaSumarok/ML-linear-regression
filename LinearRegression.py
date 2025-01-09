@@ -1,6 +1,6 @@
 import seaborn as sns
 import pandas as pd
-from seaborn import pairplot
+import ModelTraining as mt
 
 # @title
 chicago_taxi_dataset = pd.read_csv("https://download.mlcc.google.com/mledu-datasets/chicago_taxi_train.csv")
@@ -15,3 +15,14 @@ print(training_df.corr(numeric_only = True))
 #@title Code - View pairplot
 pair = sns.pairplot(training_df, x_vars=["FARE", "TRIP_MILES", "TRIP_SECONDS"], y_vars=["FARE", "TRIP_MILES", "TRIP_SECONDS"])
 pair.savefig("pairplot.png")
+
+# TODO - Adjust these hyperparameters to see how they impact a training run.
+learning_rate = 0.001
+epochs = 20
+batch_size = 50
+
+# Specify the feature and the label.
+features = ['TRIP_MILES']
+label = 'FARE'
+
+model_1 = mt.run_experiment(training_df, features, label, learning_rate, epochs, batch_size)
