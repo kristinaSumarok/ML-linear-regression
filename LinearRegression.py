@@ -22,7 +22,8 @@ epochs = 20
 batch_size = 50
 
 # Specify the feature and the label.
-features = ['TRIP_MILES']
+training_df.loc[:,'TRIP_MINUTES'] = training_df['TRIP_SECONDS']/60
+features = ['TRIP_MILES','TRIP_MINUTES']
 label = 'FARE'
 
 model_1 = mt.run_experiment(training_df, features, label, learning_rate, epochs, batch_size)
