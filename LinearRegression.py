@@ -1,6 +1,7 @@
 import seaborn as sns
 import pandas as pd
-import ModelTraining as mt
+import ModelTraining as Mt
+import Predict as Pr
 
 # @title
 chicago_taxi_dataset = pd.read_csv("https://download.mlcc.google.com/mledu-datasets/chicago_taxi_train.csv")
@@ -26,4 +27,6 @@ training_df.loc[:,'TRIP_MINUTES'] = training_df['TRIP_SECONDS']/60
 features = ['TRIP_MILES','TRIP_MINUTES']
 label = 'FARE'
 
-model_1 = mt.run_experiment(training_df, features, label, learning_rate, epochs, batch_size)
+model_1 = Mt.run_experiment(training_df, features, label, learning_rate, epochs, batch_size)
+output = Pr.predict_fare(model_1, training_df, features, label)
+Pr.show_predictions(output)

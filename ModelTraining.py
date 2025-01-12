@@ -6,7 +6,7 @@ import MakePlots as mp
 
 def build_model(my_learning_rate, num_features):
   inputs = keras.Input(shape=(num_features,)) #model takes 2 features
-  outputs = keras.layers.Dense(units=1)(inputs) #model gives back 1 prediction
+  outputs = keras.layers.Dense(units=1)(inputs) #model gives back 1 output
   model = keras.Model(inputs=inputs, outputs=outputs)
 
   # Compile the model topography into code that Keras can efficiently
